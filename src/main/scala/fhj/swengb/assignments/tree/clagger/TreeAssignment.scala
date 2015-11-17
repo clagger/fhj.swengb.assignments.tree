@@ -80,11 +80,7 @@ object MathUtil {
   def round(value: Double): Double = {
     (value * 1000).round / 1000.toDouble
   }
-  //test
 
-  def a (value:Int) :Int = {
-5
-  }
 
   /**
     * turns an angle given in degrees to a value in radiants.
