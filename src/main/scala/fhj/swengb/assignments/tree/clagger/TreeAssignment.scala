@@ -78,7 +78,12 @@ object MathUtil {
     * @return
     */
   def round(value: Double): Double = {
-    ???
+    (value * 1000).round / 1000.toDouble
+  }
+  //test
+
+  def a (value:Int) :Int = {
+5
   }
 
   /**
@@ -88,7 +93,7 @@ object MathUtil {
     * @return
     */
   def toRadiants(angle: AngleInDegrees): AngleInRadiants = {
-   ???
+   angle * (Math.PI/180)
   }
 }
 
