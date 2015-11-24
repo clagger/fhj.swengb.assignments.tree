@@ -1,4 +1,4 @@
-package fhj.swengb.assignments.tree.rladstaetter
+package fhj.swengb.assignments.tree.clagger
 
 import org.junit.Assert._
 import org.junit.Test
