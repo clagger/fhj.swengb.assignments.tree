@@ -72,10 +72,20 @@ object Graph {
               angle: Double = 45.0,
               colorMap: Map[Int, Color] = Graph.colorMap): Tree[L2D] =  {
     assert(treeDepth <= colorMap.size, s"Treedepth higher than color mappings - bailing out ...")
-    treeDepth match {
-      case zero if(treeDepth == 0) => Node(L2D.apply(start, initialAngle, length, colorMap(treeDepth)))
-      case one if (treeDepth == 1) =>  ???
+
+
+    val startP = L2D.apply(start, initialAngle, length, colorMap(0))
+
+    def makeTree(start:L2D, count:Int) :Tree[L2D] = count match {
+      case zero if(treeDepth == 0) => Node(start)
+      case node if (treeDepth == count) => Branch(Node(start),Branch(Node(start.left(factor,angle,colorMap(count-1))),Node(start.right(factor,angle,colorMap(count-1)))))
+      case branch =>   Branch(Node(start),Branch(makeTree(start.left(factor,angle,colorMap(count-1)),count+1),makeTree(start.right(factor,angle,colorMap(count-1)),count+1)))
     }
+
+    makeTree(startP, 1)
+
+
+
 
 
 
@@ -123,7 +133,7 @@ object L2D {
     * @return
     */
   def apply(start: Pt2D, angle: AngleInDegrees, length: Double, color: Color): L2D = {
-    val end = new Pt2D(start.x + Math.cos(angle.toRadians)*length,start.y + Math.sin(angle.toRadians)*length )
+    val end = new Pt2D(start.x + round(Math.cos(angle.toRadians)*length),round(start.y + Math.sin(angle.toRadians)*length))
     return new L2D(start, end, color)
   }
 
